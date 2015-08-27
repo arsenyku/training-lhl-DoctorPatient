@@ -57,11 +57,11 @@
 
     if (accepted)
     {
-        NSLog(@"%@ accepted for treatment by Dr. %@", self.name, doctor.name);
+        NSLog(@"%@ accepted for treatment by %@ (%@ specialist)", self.name, doctor.name, doctor.specialization);
         self.doctor = doctor;
 
     } else {
-        NSLog(@"%@ rejected for treatment by Dr. %@", self.name, doctor.name);
+        NSLog(@"%@ rejected for treatment by %@ (%@ specialist)", self.name, doctor.name, doctor.specialization);
     }
     
     [doctor requestMedicationForPatient:self];
