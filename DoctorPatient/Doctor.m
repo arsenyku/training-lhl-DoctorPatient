@@ -9,7 +9,8 @@
 #import "Doctor.h"
 
 @interface Doctor()
-@property (nonatomic, strong) NSMutableDictionary *records;
+@property (nonatomic, strong) NSMutableDictionary *localRecords;
+@property (nonatomic, strong) NSMutableDictionary *allRecords;
 @end
 
 @implementation Doctor
@@ -39,13 +40,15 @@
         
     	_name = @"";
         _specialization = @"";
-        _records = [NSMutableDictionary new];
+        _localRecords = [NSMutableDictionary new];
+        _allRecords = nil;
         
     }
     return self;
 }
 -(instancetype)initWithName:(NSString*)name
-          andSpecialization:(NSString*)specialization{
+          andSpecialization:(NSString*)specialization
+	 andPrescriptionRecords:(NSMutableDictionary *)allPrescriptions{
     self = [super init];
     if (self){
         
@@ -56,7 +59,8 @@
             _name = [NSString stringWithFormat:@"Dr. %@", name];
         }
         _specialization = specialization;
-        _records = [NSMutableDictionary new];
+        _localRecords = [NSMutableDictionary new];
+        _allRecords = allPrescriptions;
         
     }
     return self;
@@ -71,6 +75,13 @@
     return [self canTreatPatient:patient];
 }
 
+-(NSString*)generatePrescription{
+    // generate random medication
+    int frequency = arc4random_uniform(9) + 1;
+    int dosage = arc4random_uniform(3) + 1;
+    NSString* prescription = [NSString stringWithFormat:@"Tylenol %dx every %d hours", dosage, frequency];
+    return prescription;
+}
 -(void)requestMedicationForPatient:(Patient*)patient{
 	if ( ! [self canTreatPatient:patient] )
     {
@@ -83,9 +94,7 @@
           patient.name,
           [patient.symptoms componentsJoinedByString:@", "]);
     
-    // generate random medication
-    NSString* prescription =@"Tylenol 2x every 8 hours";
-    
+    NSString* prescription = [self generatePrescription];
     [self storePrescription:prescription forPatient:patient];
     
     [patient receivePrescription:prescription];
@@ -93,18 +102,31 @@
 }
 
 -(void)storePrescription:(NSString*)prescription forPatient:(Patient*)patient{
-	
-    NSMutableArray* previousPrescriptionsForPatient = self.records[ patient ];
+
+    NSMutableArray* previousPrescriptionsForPatient = self.localRecords[ patient.name ];
     
     if (previousPrescriptionsForPatient == nil){
         previousPrescriptionsForPatient = [NSMutableArray new];
-        self.records[patient] = previousPrescriptionsForPatient;
+        self.localRecords[patient.name] = previousPrescriptionsForPatient;
     }
     
     [previousPrescriptionsForPatient addObject:prescription];
+
+    self.allRecords[ self.name ] = self.localRecords;
     
     NSLog(@"%@ stored prescription [%@] for patient %@ into records",
           self.name, prescription, patient.name);
+    
+}
+
+-(void)showRecords{
+    NSLog(@"RECORDS:");
+    for (NSString* patientName in self.localRecords) {
+        NSLog(@"Patient: %@", patientName);
+        NSLog(@"%@", self.localRecords[patientName]);
+    }
+
+    
     
 }
 
@@ -114,7 +136,8 @@
     Doctor *aCopy = [[Doctor allocWithZone:zone] init];
     aCopy.name = [self.name copy];
     aCopy.specialization = [self.specialization copy];
-    aCopy.records = [self.records copy];
+    aCopy.localRecords = [self.localRecords copy];
+    aCopy.allRecords = [self.allRecords copy];
 
     return aCopy;
 }

@@ -15,10 +15,11 @@
 @property (nonatomic, strong) NSString *specialization;
 
 -(instancetype)initWithName:(NSString*)name
-          andSpecialization:(NSString*)specialization;
+          andSpecialization:(NSString*)specialization
+     andPrescriptionRecords:(NSMutableDictionary*)allPrescriptions;
 -(BOOL)requestTreatmentForPatient:(Patient*)patient;
 -(void)requestMedicationForPatient:(Patient*)patient;
 
-
+-(void)showRecords;
 
 @end
