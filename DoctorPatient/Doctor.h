@@ -17,9 +17,17 @@
 -(instancetype)initWithName:(NSString*)name
           andSpecialization:(NSString*)specialization
      andPrescriptionRecords:(NSMutableDictionary*)allPrescriptions;
--(BOOL)requestTreatmentForPatient:(Patient*)patient;
+
+-(BOOL)requestTreatmentApprovalForPatient:(Patient*)patient;
 -(void)requestMedicationForPatient:(Patient*)patient;
 
 -(void)showRecords;
 
+@end
+
+
+@interface MedicalReference: NSObject
+-(NSDictionary*)infoForSymptom:(NSString*)symptom;
+-(NSDictionary*)infoForDisease:(NSString*)disease;
+-(NSDictionary*)infoForMedication:(NSString*)medication;
 @end

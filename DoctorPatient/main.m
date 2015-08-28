@@ -29,14 +29,21 @@ int main(int argc, const char * argv[]) {
                                                   andAge:@132];
         patient3.healthCardId = @"76543";
         
-        [patient1 getSickAndVisitDoctor:doctorPhil];
-        [patient2 getSickAndVisitDoctor:doctorPhil];
-        [patient3 getSickAndVisitDoctor:doctorPhil];
-        [patient1 getSickAndVisitDoctor:doctorPhil];
-        [patient2 getSickAndVisitDoctor:doctorPhil];
-        [patient3 getSickAndVisitDoctor:doctorPhil];
-        [patient1 getSickAndVisitDoctor:doctorPhil];
-        [patient2 getSickAndVisitDoctor:doctorPhil];
+        
+//        @"Runny nose",
+//        @"Fever",
+//        @"Rashes",
+//        @"Irritable Skin",
+//        @"Red Eyes"
+        
+        [patient1 getSickWithSymptom:@"Runny nose" andVisitDoctor:doctorPhil];
+        [patient2 getSickWithSymptom:@"Fever" andVisitDoctor:doctorPhil];
+        [patient3 getSickWithSymptom:@"Rashes" andVisitDoctor:doctorPhil];
+        [patient1 getSickWithSymptom:@"Irritable Skin" andVisitDoctor:doctorPhil];
+        [patient2 getSickWithSymptom:@"Red Eyes" andVisitDoctor:doctorPhil];
+        [patient3 getSickWithSymptom:@"Runny nose" andVisitDoctor:doctorPhil];
+        [patient1 getSickWithSymptom:@"Fever" andVisitDoctor:doctorPhil];
+        [patient2 getSickWithSymptom:@"Rashes" andVisitDoctor:doctorPhil];
         
         Doctor* shadyDoctor = [[Doctor alloc] initWithName:@"Slim McShady"
                                          andSpecialization:@"Liver extraction"
@@ -46,10 +53,10 @@ int main(int argc, const char * argv[]) {
         Patient* shadyGuy = [[Patient alloc] initWithName:@"Leftmy Healthcardathome"
                                                    andAge:@25];
         
-        [shadyGuy getSickAndVisitDoctor:doctorPhil];
+        [shadyGuy getSickWithSymptom:@"Irritable Skin" andVisitDoctor:doctorPhil];
         
         shadyGuy.healthCardId = @"Fake12345";
-        [shadyGuy getSickAndVisitDoctor:shadyDoctor];
+        [shadyGuy getSickWithSymptom:@"Runny nose" andVisitDoctor:shadyDoctor];
         
         [doctorPhil showRecords];
         [shadyDoctor showRecords];

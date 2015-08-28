@@ -18,8 +18,8 @@
         _age = @0;
         _healthCardId = nil;
         _doctor = nil;
-        _diseases = [NSMutableArray new];
-        _symptoms = [NSMutableArray new];
+        _disease = @"";
+        _symptom = @"";
     }
     return self;
 }
@@ -33,27 +33,24 @@
         _age = age;
         _healthCardId = nil;
         _doctor = nil;
-        _diseases = [NSMutableArray new];
-        _symptoms = [NSMutableArray new];
+        _disease = @"";
+        _symptom = @"";
     }
     return self;
 }
 
 
--(BOOL)isHealthy{
-    return ([self.diseases count] < 1);
-}
+
 
 -(void)receivePrescription:(NSString *)prescription{
     NSLog(@"%@ received prescription [%@] from %@",
           self.name, prescription, self.doctor ? self.doctor.name : @"some guy in an alley.");
 }
 
--(void)getSickAndVisitDoctor:(Doctor *)doctor{
-    // Generate random symptom
-    [self.symptoms addObject:@"Runny nose"];
+-(void)getSickWithSymptom:(NSString*)symptom andVisitDoctor:(Doctor *)doctor{
+    self.symptom = symptom;
     
-    BOOL accepted = [doctor requestTreatmentForPatient:self];
+    BOOL accepted = [doctor requestTreatmentApprovalForPatient:self];
 
     if (accepted)
     {
@@ -74,8 +71,8 @@
     aCopy.age = [self.age copy];
     aCopy.healthCardId = [self.healthCardId copy];
     aCopy.doctor = [self.doctor copy];
-    aCopy.diseases = [self.diseases copy];
-    aCopy.symptoms = [self.symptoms copy];
+    aCopy.disease = [self.disease copy];
+    aCopy.symptom = [self.symptom copy];
     
     return aCopy;
 }

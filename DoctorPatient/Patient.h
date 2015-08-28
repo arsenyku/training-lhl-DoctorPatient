@@ -17,14 +17,14 @@
 @property (nonatomic, strong) NSString *healthCardId;
 @property (nonatomic, strong) Doctor *doctor;
 
-@property (nonatomic, strong) NSMutableArray* diseases;
-@property (nonatomic, strong) NSMutableArray* symptoms;
+@property (nonatomic, strong) NSString* disease;
+@property (nonatomic, strong) NSString* symptom;
 
 -(instancetype)initWithName:(NSString *)name
                      andAge:(NSNumber*)age;
 
--(BOOL)isHealthy;
+
 -(void)receivePrescription:(NSString*)prescription;
--(void)getSickAndVisitDoctor:(Doctor*)doctor;
+-(void)getSickWithSymptom:(NSString*)symptom andVisitDoctor:(Doctor*)doctor;
 
 @end
