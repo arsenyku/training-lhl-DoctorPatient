@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Doctor.h"
 #import "Patient.h"
+#import "MedicalReference.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -29,21 +30,19 @@ int main(int argc, const char * argv[]) {
                                                   andAge:@132];
         patient3.healthCardId = @"76543";
         
-        
-//        @"Runny nose",
-//        @"Fever",
-//        @"Rashes",
-//        @"Irritable Skin",
-//        @"Red Eyes"
-        
-        [patient1 getSickWithSymptom:@"Runny nose" andVisitDoctor:doctorPhil];
-        [patient2 getSickWithSymptom:@"Fever" andVisitDoctor:doctorPhil];
-        [patient3 getSickWithSymptom:@"Rashes" andVisitDoctor:doctorPhil];
-        [patient1 getSickWithSymptom:@"Irritable Skin" andVisitDoctor:doctorPhil];
-        [patient2 getSickWithSymptom:@"Red Eyes" andVisitDoctor:doctorPhil];
-        [patient3 getSickWithSymptom:@"Runny nose" andVisitDoctor:doctorPhil];
-        [patient1 getSickWithSymptom:@"Fever" andVisitDoctor:doctorPhil];
-        [patient2 getSickWithSymptom:@"Rashes" andVisitDoctor:doctorPhil];
+        NSArray* patients = @[ patient1, patient2, patient3 ];
+        NSArray* symptoms = [[MedicalReference standardReference] listKnownSymptoms];
+
+
+        int symptomNumber = 0;
+
+        for (int i=0; i < 4; i++){
+            for (Patient *patient in patients) {
+                NSString* symptom = symptoms[ symptomNumber % [symptoms count] ];
+                [patient getSickWithSymptom:symptom andVisitDoctor:doctorPhil];
+                symptomNumber ++;
+            }
+        }
         
         Doctor* shadyDoctor = [[Doctor alloc] initWithName:@"Slim McShady"
                                          andSpecialization:@"Liver extraction"

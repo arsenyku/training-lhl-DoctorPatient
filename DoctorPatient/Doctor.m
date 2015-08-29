@@ -7,66 +7,7 @@
 //
 
 #import "Doctor.h"
-
-@interface MedicalReference()
-@property (nonatomic, strong) NSArray *knownDiseases;
-@property (nonatomic, strong) NSArray *knownMedications;
-@property (nonatomic, strong) NSArray *knownSymptoms;
-@end
-
-@implementation MedicalReference
-
-
--(instancetype)init{
-    self = [super init];
-    if (self){
-        self.knownDiseases = @[ @"Malaria",
-                                @"Common Cold",
-                                @"Tuberculosis",
-                                @"Polio",
-                                @"Typhoid Fever"];
-        
-        self.knownMedications = @[ @"Tylenol",
-                                   @"Valium",
-                                   @"Claritin",
-                                   @"Morphine",
-                                   @"Heroin" ];
-        
-        self.knownSymptoms = @[ @"Runny nose",
-                                @"Fever",
-                                @"Rashes",
-                                @"Irritable Skin",
-                                @"Red Eyes"];
-    }
-    
-    return self;
-}
-
--(NSDictionary*)infoForTarget:(id)target inArray:(NSArray*)array{
-    unsigned long targetIndex = [array indexOfObject:target];
-    if (targetIndex == -1)
-        return nil;
-    
-    NSDictionary *result = @{ @"symptom":self.knownSymptoms[targetIndex],
-                              @"disease":self.knownDiseases[targetIndex],
-                              @"medication":self.knownMedications[targetIndex] };
-    
-    return result;
-}
-
--(NSDictionary*)infoForSymptom:(NSString*)symptom{
-    return [self infoForTarget:symptom inArray:self.knownSymptoms];
-}
-
--(NSDictionary*)infoForDisease:(NSString*)disease{
-    return [self infoForTarget:disease inArray:self.knownDiseases];
-}
-
--(NSDictionary*)infoForMedication:(NSString*)medication{
-    return [self infoForTarget:medication inArray:self.knownMedications];
-}
-@end
-
+#import "MedicalReference.h"
 
 @interface Doctor()
 @property (nonatomic, strong) NSMutableDictionary *localRecords;
@@ -78,17 +19,7 @@
 @implementation Doctor
 
 -(instancetype)init{
-    self = [super init];
-    if (self){
-        
-    	_name = @"";
-        _specialization = @"";
-        _localRecords = [NSMutableDictionary new];
-        _allRecords = nil;
-        _book = [MedicalReference new];
-        _approvedPatients = [NSMutableArray new];
-        
-    }
+    self = [self initWithName:@"" andSpecialization:@"" andPrescriptionRecords:nil];
     return self;
 }
 -(instancetype)initWithName:(NSString*)name
@@ -107,7 +38,7 @@
         _specialization = specialization;
         _localRecords = [NSMutableDictionary new];
         _allRecords = allPrescriptions;
-        _book = [MedicalReference new];
+        _book = [MedicalReference standardReference];
         _approvedPatients = [NSMutableArray new];
 
         
@@ -133,7 +64,7 @@
 
 -(NSString*)generatePrescriptionForSymptom:(NSString*)symptom{
     // generate random medication
-    int frequency = arc4random_uniform(9) + 1;
+    int frequency = arc4random_uniform(25) + 1;
     int dosage = arc4random_uniform(3) + 1;
     
     NSDictionary* diagnosis = [self.book infoForSymptom:symptom];

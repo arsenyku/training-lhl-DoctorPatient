@@ -10,6 +10,7 @@
 		129777B51B8F9A460018CCDA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 129777B41B8F9A460018CCDA /* main.m */; };
 		129777BD1B8F9A5A0018CCDA /* Doctor.m in Sources */ = {isa = PBXBuildFile; fileRef = 129777BC1B8F9A5A0018CCDA /* Doctor.m */; };
 		129777C01B8F9A710018CCDA /* Patient.m in Sources */ = {isa = PBXBuildFile; fileRef = 129777BF1B8F9A710018CCDA /* Patient.m */; };
+		12EB8AE61B9221900011AFD8 /* MedicalReference.m in Sources */ = {isa = PBXBuildFile; fileRef = 12EB8AE51B9221900011AFD8 /* MedicalReference.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,6 +32,8 @@
 		129777BC1B8F9A5A0018CCDA /* Doctor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Doctor.m; sourceTree = "<group>"; };
 		129777BE1B8F9A710018CCDA /* Patient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Patient.h; sourceTree = "<group>"; };
 		129777BF1B8F9A710018CCDA /* Patient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Patient.m; sourceTree = "<group>"; };
+		12EB8AE41B9221900011AFD8 /* MedicalReference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MedicalReference.h; sourceTree = "<group>"; };
+		12EB8AE51B9221900011AFD8 /* MedicalReference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MedicalReference.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +71,8 @@
 				129777BC1B8F9A5A0018CCDA /* Doctor.m */,
 				129777BE1B8F9A710018CCDA /* Patient.h */,
 				129777BF1B8F9A710018CCDA /* Patient.m */,
+				12EB8AE41B9221900011AFD8 /* MedicalReference.h */,
+				12EB8AE51B9221900011AFD8 /* MedicalReference.m */,
 			);
 			path = DoctorPatient;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 				129777C01B8F9A710018CCDA /* Patient.m in Sources */,
 				129777BD1B8F9A5A0018CCDA /* Doctor.m in Sources */,
 				129777B51B8F9A460018CCDA /* main.m in Sources */,
+				12EB8AE61B9221900011AFD8 /* MedicalReference.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +253,7 @@
 				129777BA1B8F9A460018CCDA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

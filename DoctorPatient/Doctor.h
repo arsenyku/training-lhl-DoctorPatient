@@ -26,8 +26,4 @@
 @end
 
 
-@interface MedicalReference: NSObject
--(NSDictionary*)infoForSymptom:(NSString*)symptom;
--(NSDictionary*)infoForDisease:(NSString*)disease;
--(NSDictionary*)infoForMedication:(NSString*)medication;
-@end
+
